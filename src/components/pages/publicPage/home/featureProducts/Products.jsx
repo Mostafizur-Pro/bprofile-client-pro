@@ -1,64 +1,47 @@
-import carImage from "@/assets/home/featureProducts/svu.jpg";
-import phoneImage from "@/assets/home/featureProducts/phone.jpg";
-import sofaImage from "@/assets/home/featureProducts/sofa.jpg";
-import bookImage from "@/assets/home/featureProducts/book.jpg";
-import jacketImage from "@/assets/home/featureProducts/jacket.jpg";
-import tomatoesImage from "@/assets/home/featureProducts/tomatoes.png";
-import lampImage from "@/assets/home/featureProducts/lamp.jpg";
-import basketballImage from "@/assets/home/featureProducts/basketball.jpg";
 import Product from "./Product";
+import { useEffect, useState } from "react";
 
 const Products = () => {
-  const featuredProducts = [
-    {
-      name: "Cabbage",
-      category_name: "Food & Beverage",
-      price: "BDT22.97",
-      image: tomatoesImage,
-    },
-    {
-      name: "Smartphone",
-      category_name: "Electronics",
-      price: 499.99,
-      image: phoneImage,
-    },
-    {
-      name: "Leather Jacket",
-      category_name: "Fashion",
-      price: 129.99,
-      image: jacketImage,
-    },
-    {
-      name: "Sofa Set",
-      category_name: "Home Decor",
-      price: 899.99,
-      image: sofaImage,
-    },
-    {
-      name: "Mathematics Textbook",
-      category_name: "Education",
-      price: 39.99,
-      image: bookImage,
-    },
-    {
-      name: "Basketball",
-      category_name: "Sports",
-      price: 24.99,
-      image: basketballImage,
-    },
-    {
-      name: "SUV",
-      category_name: "Vehicle",
-      price: 35.0,
-      image: carImage,
-    },
-    {
-      name: "Desk Lamp",
-      category_name: "Home Decor",
-      price: 49.99,
-      image: lampImage,
-    },
-  ];
+  const [page, setPage] = useState(1); // Start from page 1
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const postPerPage = 6;
+
+  console.log("paid image", posts);
+
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${
+          import.meta.env.VITE_LOCAL_API_URL
+        }/api/v1/paid_image?page=${page}&limit=${postPerPage}`
+      );
+      const data = await response.json();
+      setLoading(false);
+
+      setPosts(data.data);
+
+      // console.log('paid image', data)
+
+      if (data.data.length === 0) {
+        setHasMore(false);
+        return;
+      }
+
+      // setPosts((prevPosts) => [...prevPosts, ...data.data]);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      // setUserData("user");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, [page]);
+
   return (
     <section className=" b_profile_container">
       <div className="py-16">
@@ -70,7 +53,7 @@ const Products = () => {
         </div>
         <div className="md:pt-10 pt-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 md:gap-6 gap-3">
-            {featuredProducts.map((product, idx) => (
+            {posts.map((product, idx) => (
               <Product key={idx} product={product}></Product>
             ))}
           </div>

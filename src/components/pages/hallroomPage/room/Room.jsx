@@ -38,7 +38,7 @@ const Room = () => {
       setPosts((prevPosts) => [...prevPosts, ...data.data]);
     } catch (error) {
       console.error("Error fetching posts:", error);
-      setUserData("user");
+      // setUserData("user");
       setLoading(false);
     }
   };

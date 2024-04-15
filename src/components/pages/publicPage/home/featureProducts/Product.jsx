@@ -9,8 +9,18 @@ const Product = ({ product }) => {
       <div className="relative">
         <img
           className="object-cover w-full h-full border rounded-xl"
-          src={product.image}
-          alt={product.name}
+          
+          src={
+            product?.image ===
+              "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png" ||
+            product?.image ===
+              "https://www.vhv.rs/dpng/d/15-155087_dummy-image-of-user-hd-png-download.png"
+              ? product?.image
+              : `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/images/uploads/${
+                  product?.image
+                }`
+          }
+          alt={product.image}
         />
         <div className="absolute md:top-3.5 top-1.5 md:right-3.5 right-1.5">
           {isLiked ? (
