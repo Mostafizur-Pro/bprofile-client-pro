@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Abu-Abdullah",
+    "image": "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
+    "organization": "Al Mosina Enterprise",
+    "contact_number": "01723666792",
+    "business_type": ["Grocery Stores", "Food & Beverage"],
+    "address": {
+      "road_house_no": "5",
+      "area": "Rupnagar",
+      "ward": "Ward-6",
+      "thana": "Pallabi",
+      "district": "Dhaka North",
+      "division": "Dhaka Division"
+    },
+    "email": "example@gmail.com",
+    "employee_id": "BP0324F0014"
+  },
+  {
+    "name": "Abu-Abdullah",
+    "image": "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
+    "organization": "Madina Boi Ghor",
+    "contact_number": "01604421505",
+    "business_type": ["Convenience Stores", "Food & Beverage"],
+    "address": {
+      "road_house_no": "Line 21",
+      "area": "Block-C",
+      "ward": "Ward-2",
+      "thana": "Pallabi",
+      "district": "Dhaka North",
+      "division": "Dhaka Division"
+    },
+    "email": "example@gmail.com",
+    "employee_id": "BP0324F0012"
+  },
+  {
+    "name": "Abul Khayer",
+    "image": "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
+    "organization": "Ariyan Hotel",
+    "contact_number": "01721814499",
+    "business_type": ["Traditional Food", "Food & Beverage"],
+    "address": {
+      "road_house_no": "1st station",
+      "area": "Ranavola (partial)",
+      "ward": "Ward-1",
+      "thana": "Uttara",
+      "district": "Dhaka North",
+      "division": "Dhaka Division"
+    },
+    "email": "example@gmail.com",
+    "employee_id": "BP0324F0010"
+  },
+  {
+    "name": "Adel Rahman",
+    "image": "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
+    "organization": "Metro Food",
+    "contact_number": "01567987654",
+    "business_type": ["Fast Food Chains", "Food & Beverage"],
+    "address": {
+      "road_house_no": "Road 06",
+      "area": "Sector 10",
+      "ward": "Ward-1",
+      "thana": "Uttara",
+      "district": "Dhaka North",
+      "division": "Dhaka Division"
+    },
+    "email": "example@gmail.com",
+    "employee_id": "BP0324F0010"
+  },
+  {
+    "name": "AG",
+    "image": "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
+    "organization": "AG Electronics",
+    "contact_number": "0183874974",
+    "business_type": ["Fridges & ACs", "Electronics"],
+    "address": {
+      "road_house_no": "32/a",
+      "area": "Sector 7",
+      "ward": "Ward-1",
+      "thana": "Uttara",
+      "district": "Dhaka North",
+      "division": "Dhaka Division"
+    },
+    "email": "example@gmail.com",
+    "employee_id": "BP0324F0010"
+  },
+  {
+    "name": "Ahakil",
+    "image": "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
+    "organization": "Chat Pur Laibary",
+    "contact_number": "01739123209",
+    "business_type": ["Library", "Education"],
+    "address": {
+      "road_house_no": "13",
+      "thana": "Pallabi",
+      "district": "Dhaka North",
+      "division": "Dhaka Division"
+    },
+    "email": "example@gmail.com",
+    "employee_id": "BP0324F0011"
+  },
+  {
+    "name": "Akash Hossain",
+    "image": "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
+    "organization": "Jonoprio Traders",
+    "contact_number": "01319409446",
+    "business_type": ["Restaurant", "Hotel & Restaurant"],
+    "address": {
+      "road_house_no": "7",
+      "area": "Mirpur Section-11",
+      "ward": "Ward-5",
+      "thana": "Pallabi",
+      "district": "Dhaka North",
+      "division": "Dhaka Division"
+    },
+    "email": "example@gmail.com",
+    "employee_id": "BP0324F0011"
+  },
+  {
+    "name": "Akib Ahmed",
+    "image": "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
+    "organization": "Green Food",
+    "contact_number": "01815273919",
+    "business_type": ["Convenience Stores", "Food & Beverage"],
+    "address": {
+      "road_house_no": "",
+      "area": "Sujatnagar",
+      "ward": "Ward-6",
+      "thana": "Pallabi",
+      "district": "Dhaka North",
+      "division": "Dhaka Division"
+    },
+    "email": "example@gmail.com",
+    "employee_id": "BP0324F0008"
+  },
+  {
+    "name": "Akther",
+    "image": "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
+    "organization": "Sunny Servicing Center",
+    "contact_number": "01916768585",
+    "business_type": [],
+    "address": {},
+    "email": "example@gmail.com",
+    "employee_id": ""
+  }
+]

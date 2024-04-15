@@ -1,0 +1,108 @@
+import DeleteAction from "@/components/core/DeleteAction";
+import EditAction from "@/components/core/EditAction";
+import ViewAction from "@/components/core/ViewAction";
+import CustomSpinner from "@/components/core/spinner/Spinner";
+import DashboardTable from "@/components/core/table/DashboardTable";
+import useGetAdminData from "@/components/hooks/admin/admin";
+
+import { formatDateString } from "@/utils/getCurrentDate";
+
+const AdminsInformation = () => {
+  const [admins, loading, error] = useGetAdminData(
+    `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/admin`
+  );
+
+  if (loading) {
+    return (
+      <div>
+        <CustomSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  const DashboardColumns = [
+    {
+      title: "Serial",
+      dataKey: "serial",
+      row: (admins) => <span>{admins?.profile_id}</span>,
+    },
+    {
+      title: "Name",
+      dataKey: "name",
+      row: (admins) => (
+        <div className="flex items-center gap-2">
+          <div>
+            <img
+              className="w-8 h-8 md:w-12 md:h-12 rounded-[10px] object-cover"
+              src={
+                admins?.image ===
+                "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png"
+                  ? admins?.image
+                  : `${
+                      import.meta.env.VITE_LOCAL_API_URL
+                    }/api/v1/images/uploads/${admins?.image}`
+              }
+              alt={admins?.name}
+            />
+          </div>
+          <div>
+            <p className="font-semibold capitalize">{admins?.name} </p>
+            <p>{admins?.role}</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Contact",
+      dataKey: "contact",
+      row: (admins) => (
+        <div>
+          <p>{admins?.number}</p>
+          <p>{admins?.email}</p>
+        </div>
+      ),
+    },
+    {
+      title: "date",
+      dataKey: "date",
+      row: (admins) => (
+        <div>
+          <p>{formatDateString(admins.createdAt)}</p>
+        </div>
+      ),
+    },
+    {
+      title: "Action",
+      dataKey: "action",
+      row: (admins) => (
+        <div className="flex">
+          <DeleteAction
+            handleDeleteSubmit={() => undefined}
+            isLoading={false}
+          />
+          <EditAction admins={admins} />          
+          <ViewAction admins={admins} />
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <div className="space-y-5">
+      <p className="text-3xl font-semibold  text-center">
+        All Admins Information
+      </p>
+      <DashboardTable
+        data={admins}
+        columns={DashboardColumns}
+        isLoading={false}
+      />
+    </div>
+  );
+};
+
+export default AdminsInformation;

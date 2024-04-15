@@ -1,0 +1,96 @@
+[
+  {
+    "name": "Basic",
+    "price": "200tk",
+    "features": [
+      "3 standard images advertisement",
+      "Facebook page creation",
+      "Full access to business Hall Room",
+      "30 post a month in Business Hall Room",
+      "Facebook page optimization",
+      "24/7 customer support"
+    ]
+  },
+  {
+    "name": "Standard",
+    "price": "400tk",
+    "features": [
+      "4 standard image advertisement",
+      "1 standard video advertisement",
+      "Facebook page creation",
+      "Facebook page logo creation",
+      "Full access to business Hall Room",
+      "30 post a month in Business Hall Room",
+      "Facebook page optimization",
+      "24/7 customer support"
+    ]
+  },
+  {
+    "name": "Advance",
+    "price": "600tk",
+    "features": [
+      "6 standard image advertisement",
+      "2 standard video advertisement",
+      "Petty Cash Software",
+      "Instagram Page creation",
+      "Facebook page creation",
+      "Facebook page logo creation",
+      "Full access to business Hall Room",
+      "30 post a month in Business Hall Room",
+      "Facebook page optimization",
+      "24/7 customer support"
+    ]
+  },
+  {
+    "name": "Plus",
+    "price": "1000tk",
+    "features": [
+      "10 standard image advertisement",
+      "3 standard video advertisement",
+      "Accounting Software",
+      "Petty Cash Software",
+      "Instagram Page creation",
+      "Facebook page creation",
+      "Facebook page logo creation",
+      "Full access to business Hall Room",
+      "30 post a month in Business Hall Room",
+      "Facebook page optimization",
+      "24/7 customer support"
+    ]
+  },
+  {
+    "name": "Pro",
+    "price": "1500tk",
+    "features": [
+      "10 standard image advertisement",
+      "3 standard video advertisement",
+      "Inventory Management Software",
+      "Petty Cash Software",
+      "Instagram Page creation",
+      "Facebook page creation",
+      "Facebook page logo creation",
+      "Full access to business Hall Room",
+      "30 post a month in Business Hall Room",
+      "Facebook page optimization",
+      "24/7 customer support"
+    ]
+  },
+  {
+    "name": "Ultra",
+    "price": "2000tk",
+    "features": [
+      "10 standard image advertisement",
+      "3 standard video advertisement",
+      "Accounting Software",
+      "Inventory Management Software",
+      "Petty Cash Software",
+      "Instagram Page creation",
+      "Facebook page creation",
+      "Facebook page logo creation",
+      "Full access to business Hall Room",
+      "30 post a month in Business Hall Room",
+      "Facebook page optimization",
+      "24/7 customer support"
+    ]
+  }
+]
