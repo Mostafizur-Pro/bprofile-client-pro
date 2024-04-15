@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import Logo02Image from "@/assets/logo/logo1.png";
+import logo from "@/assets/logo/final/main.png";
 import { NavLink, Link } from "react-router-dom";
 import bLogoImage from "../../../assets/logo/b-room.png";
 import LogoImage from "../../../assets/logo/logo.png";
@@ -124,12 +124,12 @@ const Navbar = () => {
   const { clientData, adminData, userData, employeeData } = useAuth();
 
   return (
-    <nav className="py-5 sticky top-0 bg-white z-50">
+    <nav className="py-2 sticky top-0 bg-white z-50">
       <div className="b_profile_container">
         <div className="flex items-center justify-between">
           <div className="w-[100px] md:w-[145px] xl:w-[176px]">
             <Link to={"/"}>
-              <img src={Logo02Image} alt="logo" loading="lazy" />
+              <img src={logo} alt="logo" loading="lazy" />
             </Link>
           </div>
           {/* links */}
@@ -199,7 +199,7 @@ const Navbar = () => {
               className="font-semibold -mb-[25px] animate-ping-slow"
               to={"/room"}
             >
-              <img className="w-20" src={bLogoImage} alt="" />
+              <img className="w-24 -mb-5" src={bLogoImage} alt="" />
             </NavLink>
           </div>
           <div className="flex items-center">
