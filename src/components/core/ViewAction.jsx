@@ -1,12 +1,11 @@
 import { useState } from "react";
-
 import { FaEye } from "react-icons/fa";
-
 import { Button } from "../ui/button";
 import { AlertDialog, AlertDialogContent } from "../ui/alert-dialog";
 
 const ViewAction = ({ admins }) => {
   const [open, setOpen] = useState(false);
+  // console.log('cli', admins);
 
   return (
     <div>

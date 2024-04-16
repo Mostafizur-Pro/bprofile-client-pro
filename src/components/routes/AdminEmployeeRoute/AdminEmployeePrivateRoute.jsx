@@ -6,15 +6,16 @@ import useAdmin from "@/components/hooks/admin/useAdmin";
 import useEmployee from "@/components/hooks/admin/useEmployee";
 
 const AdminEmployeePrivateRoute = ({ children }) => {
-  const { adminData, employeeData, loading } = useContext(AuthContext);
+  const { adminData, employeeData, isAuthenticated } = useContext(AuthContext);
   const location = useLocation();
 
+  // console.log('admin', isAuthenticated);
 
   // Custom hooks to check admin and employee status
   const [isAdmin, isAdminLoading] = useAdmin(adminData?.admin_email);
   const [isEmployee, isEmployeeLoading] = useEmployee(employeeData?.emp_email);
 
-  if (loading) {
+  if (isAuthenticated) {
     <CustomSpinner />;
   }
 

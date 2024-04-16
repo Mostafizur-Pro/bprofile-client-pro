@@ -44,6 +44,7 @@ import AllProviderRoute from "./AdminRoute/AllProviderRoute";
 import Employee_Profile from "../pages/dashboard/employee/employee_profile/Employee_Profile";
 import AdminEmployeePrivateRoute from "./AdminEmployeeRoute/AdminEmployeePrivateRoute";
 import LoginRoute from "./LoginRoute/LoginRoute";
+import AllEmpClientsList from "../pages/dashboard/employee/profileLists/AllEmpClientList";
 
 const router = createBrowserRouter([
   // Home
@@ -99,11 +100,7 @@ const router = createBrowserRouter([
       // },
       {
         path: "/login",
-        element: (
-          <LoginRoute>
-            <Login />
-          </LoginRoute>
-        ),
+        element: <Login />,
       },
       {
         path: "/register",
@@ -184,7 +181,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/emp/client-list",
-        element: <AllClientsList />,
+        element: <AllEmpClientsList />,
       },
       // all profile lists
       {
