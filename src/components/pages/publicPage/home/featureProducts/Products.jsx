@@ -6,7 +6,7 @@ const Products = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const postPerPage = 10;
+  const postPerPage = 12;
 
   // console.log("paid image", posts);
 
@@ -52,7 +52,7 @@ const Products = () => {
           <div className="w-full h-[1px] bg-black/10"></div>
         </div>
         <div className="md:pt-10 pt-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 md:gap-6 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-3 md:gap-6 gap-3">
             {posts.map((product, idx) => (
               <Product key={idx} product={product}></Product>
             ))}

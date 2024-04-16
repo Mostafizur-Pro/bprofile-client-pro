@@ -8,8 +8,7 @@ const Product = ({ product }) => {
     <div className="md:mb-6 mb-3.5">
       <div className="relative">
         <img
-          className="object-cover w-full h-full border rounded-xl"
-          
+          className="object-cover w-full h-60 border rounded-xl"
           src={
             product?.image ===
               "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png" ||
@@ -42,11 +41,15 @@ const Product = ({ product }) => {
       </div>
       <div className="md:flex items-center justify-between mt-3">
         <div className="">
-          <h3 className="md:text-xl text-lg font-semibold">{product.name}</h3>
-          <p className="md:text-sm text-xs">{product.category_name}</p>
+          <h3 className="md:text-xl text-lg font-semibold">{product.title}</h3>
+          <p className="md:text-sm text-xs">
+            {product.post && product.post.length > 20
+              ? `${product.post.slice(0, 100)}...`
+              : product.post}
+          </p>
         </div>
         <div className="">
-          <h2 className="md:text-2xl">${product.price}</h2>
+          {/* <h2 className="md:text-2xl">${product.price}</h2> */}
         </div>
       </div>
     </div>

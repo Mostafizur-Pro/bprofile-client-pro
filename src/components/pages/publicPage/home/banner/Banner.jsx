@@ -1,9 +1,10 @@
 // import logo from "../../../assets/All logo/b.png";
 import logo from "@/assets/AllLogo/b.png";
+import image1 from "@/assets/home/slider3/1.1.png";
+import image2 from "@/assets/home/slider3/2.1.png";
+import image3 from "@/assets/home/slider3/3.1.png";
 import "./Banner.css";
-// import image1 from "../../../assets/home/slider3/1.1.png";
-// import image2 from "../../../assets/home/slider3/2.1.png";
-// import image3 from "../../../assets/home/slider3/3.1.png";
+
 const HomeBanner = () => {
   return (
     <div>
@@ -72,7 +73,7 @@ const HomeBanner = () => {
             </dialog>
             <div className="p-8 mt-12 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3 justify-center">
               <div className="h-48 flex flex-wrap content-center">
-                {/* <img
+                <img
                   className="inline-block mt-28 hidden xl:block image-transition"
                   src={image1}
                   id="mainImage1"
@@ -86,7 +87,7 @@ const HomeBanner = () => {
                   className="inline-block mt-28 hidden lg:block image-transition"
                   src={image3}
                   id="mainImage3"
-                /> */}
+                />
               </div>
             </div>
           </div>

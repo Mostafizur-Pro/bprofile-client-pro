@@ -8,11 +8,49 @@ import table from "@/assets/home/popularProducts/table.jpg";
 import yoga from "@/assets/home/popularProducts/yoga.jpg";
 import { RiArrowLeftDoubleFill, RiArrowRightDoubleLine } from "react-icons/ri";
 import Slider from "react-slick";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const PopularProducts = () => {
+  const [page, setPage] = useState(1); // Start from page 1
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const postPerPage = 12;
+
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${
+          import.meta.env.VITE_LOCAL_API_URL
+        }/api/v1/paid_image?page=${page}&limit=${postPerPage}`
+      );
+      const data = await response.json();
+      setLoading(false);
+
+      setPosts(data.data);
+
+      // console.log('paid image', data)
+
+      if (data.data.length === 0) {
+        setHasMore(false);
+        return;
+      }
+
+      // setPosts((prevPosts) => [...prevPosts, ...data.data]);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      // setUserData("user");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, [page]);
+
   const popularProducts = [
     {
       name: "Smart TV",
@@ -126,21 +164,30 @@ const PopularProducts = () => {
               {...settings}
               className="grid grid-cols-4 gap-6 items-end bottom-0 md:px-6 px-2"
             >
-              {popularProducts.map((d, i) => (
+              {posts.map((post, i) => (
                 <div className="md:px-5 px-1" key={i}>
                   <div className=" md:py-6 text-black  skill-style">
                     <div className="">
                       <img
-                        src={d.image}
+                        src={
+                          post?.image ===
+                            "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png" ||
+                          post?.image ===
+                            "https://www.vhv.rs/dpng/d/15-155087_dummy-image-of-user-hd-png-download.png"
+                            ? post?.image
+                            : `${
+                                import.meta.env.VITE_LOCAL_API_URL
+                              }/api/v1/images/uploads/${post?.image}`
+                        }
                         className=" mx-auto md:h-80 h-48 md:w-80 w-48  rounded-[8px] border object-cover"
-                        alt={d.name}
+                        alt={post.title}
                       />
                     </div>
                     <div className="md:pt-3 pt-1.5">
                       <h3 className=" md:text-xl text-md font-semibold">
-                        {d.name}
+                        {post.title}
                       </h3>
-                      <p className="md:text-sm text-xs">{d.category}</p>
+                      <p className="md:text-sm text-xs">{post.category}</p>
                     </div>
                   </div>
                 </div>
@@ -149,7 +196,7 @@ const PopularProducts = () => {
 
             <div className="absolute -top-9 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <h2 className="md:text-4xl text-xl font-semibold bg-white px-6 text-center">
-                Most Populer
+                Most Popular
               </h2>
             </div>
             <div className="absolute top-1/2 left-0 transform -translate-x-1/2 -translate-y-1/2">
