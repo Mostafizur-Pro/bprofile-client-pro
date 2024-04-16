@@ -113,9 +113,9 @@ const Login = () => {
           <h2 className="text-4xl px-4 ">Log In</h2>
           <form className="mt-10 space-y-4" onSubmit={handleSubmit}>
             <TextInput
-              id={"email"}
-              label="Email address"
-              type="email"
+              id={"text"}
+              label="Email or Number"
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

@@ -1,11 +1,3 @@
-import tv from "@/assets/home/popularProducts/tv.jpg";
-import tShirt from "@/assets/home/popularProducts/4.webp";
-import shoe from "@/assets/home/popularProducts/140.webp";
-import blender from "@/assets/home/popularProducts/blender.jpg";
-import camera from "@/assets/home/popularProducts/camera.jpg";
-import cooker from "@/assets/home/popularProducts/cooker.jpg";
-import table from "@/assets/home/popularProducts/table.jpg";
-import yoga from "@/assets/home/popularProducts/yoga.jpg";
 import { RiArrowLeftDoubleFill, RiArrowRightDoubleLine } from "react-icons/ri";
 import Slider from "react-slick";
 import { useEffect, useRef, useState } from "react";
@@ -50,59 +42,6 @@ const PopularProducts = () => {
   useEffect(() => {
     fetchPosts();
   }, [page]);
-
-  const popularProducts = [
-    {
-      name: "Smart TV",
-      image: tv,
-      category: "Electronics",
-      location: "Living Room",
-    },
-    {
-      name: "Running Shoes",
-      image: shoe,
-      category: "Sports",
-      location: "Bedroom",
-    },
-    {
-      name: "Coffee Table",
-      image: table,
-      category: "Home Decor",
-      location: "Living Room",
-    },
-    {
-      name: "Digital Camera",
-      image: camera,
-      category: "Electronics",
-      location: "Home Office",
-    },
-    {
-      name: "Cookware Set",
-      image: cooker,
-      category: "Kitchen & Dining",
-      location: "Kitchen",
-    },
-
-    {
-      name: "Graphic T-Shirt",
-      image: tShirt,
-      category: "Fashion",
-      location: "Closet",
-    },
-    {
-      name: "Yoga Mat",
-      image: yoga,
-      category: "Sports",
-      location: "Home Gym",
-    },
-
-    {
-      name: "Portable Blender",
-      image: blender,
-      category: "Kitchen Appliances",
-      location: "Kitchen",
-    },
-  ];
 
   const sliderRef = useRef(null);
   const prevArrow = () => {
