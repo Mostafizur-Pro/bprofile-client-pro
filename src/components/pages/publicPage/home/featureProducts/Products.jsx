@@ -6,9 +6,9 @@ const Products = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const postPerPage = 6;
+  const postPerPage = 10;
 
-  console.log("paid image", posts);
+  // console.log("paid image", posts);
 
   const fetchPosts = async () => {
     setLoading(true);
