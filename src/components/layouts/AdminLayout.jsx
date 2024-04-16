@@ -55,7 +55,7 @@ const AdminLayout = () => {
         <AdminLeftAside />
       </div>
       <div className="bg-primary_blue lg:hidden block fixed top-0 left-0 h-screen w-10">
-        <NavbarHamburgerMenu></NavbarHamburgerMenu>
+        <NavbarHamburgerMenu/>
       </div>
 
       <div className="lg:col-span-8 grow lg:ms-0 ms-10">

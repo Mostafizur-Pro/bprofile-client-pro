@@ -1,22 +1,27 @@
-import { AuthContext } from "@/components/context/AuthContext";
-import CustomSpinner from "@/components/core/spinner/Spinner";
 import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { AuthContext } from "@/components/context/AuthContext";
+import CustomSpinner from "@/components/core/spinner/Spinner";
 
 const AllProviderRoute = ({ children }) => {
-  const { admin, client, user, employee, loading } = useContext(AuthContext);
-  // console.log(loading);
+  const { userData, clientData, adminData, employeeData, loading } =
+    useContext(AuthContext);
   const location = useLocation();
 
+  // Show spinner while loading authentication state
   if (loading) {
     return <CustomSpinner />;
   }
 
-  if (admin || client || user || employee) {
-    return children;
-  }
+  // Check if any user is authenticated
+  const isAuthenticated = adminData || clientData || userData || employeeData;
 
-  return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
+  // Render children if authenticated, otherwise redirect to login
+  return isAuthenticated ? (
+    children
+  ) : (
+    <Navigate to="/login" state={{ from: location }} replace />
+  );
 };
 
 export default AllProviderRoute;

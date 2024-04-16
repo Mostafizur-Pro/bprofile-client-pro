@@ -121,8 +121,8 @@ const NavbarHamburgerMenu = () => {
 
 // default component
 const Navbar = () => {
-  const { clientData, adminData, userData, employeeData } = useAuth();
-
+  const { clientData, adminData, userData, employeeData, user } = useAuth();
+// console.log('d/ata', user);
   return (
     <nav className="py-2 sticky top-0 bg-white z-50">
       <div className="b_profile_container">

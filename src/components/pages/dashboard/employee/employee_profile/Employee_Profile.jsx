@@ -172,7 +172,7 @@ const Employee_Profile = () => {
         </Modal.Body>
       </Modal>
       {/*Not Changing Component  */}
-      <div className="col-span-3 flex flex-col gap-5 items-center justify-center">
+      <div className="col-span-3 flex flex-col gap-5 items-center justify-center hidden lg:block">
         <img
           className="w-[100px] h-[100px] md:w-[300px] md:h-[300px] object-cover"
           src={`${import.meta.env.VITE_LOCAL_API_URL}/api/v1/images/uploads/${
@@ -200,6 +200,13 @@ const Employee_Profile = () => {
             activeTab={activeTab}
           />
         </div>
+        <img
+          className="w-[100px] h-[100px] md:w-[300px] md:h-[300px] object-cover block lg:hidden"
+          src={`${import.meta.env.VITE_LOCAL_API_URL}/api/v1/images/uploads/${
+            employeeData?.image
+          }`}
+          alt=""
+        />
         {activeTab === "profile_details" && (
           <div className="flex-grow space-y-2 rounded-[10px]">
             <div>

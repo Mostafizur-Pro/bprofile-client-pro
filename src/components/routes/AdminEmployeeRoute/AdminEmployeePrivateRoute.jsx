@@ -9,6 +9,7 @@ const AdminEmployeePrivateRoute = ({ children }) => {
   const { adminData, employeeData, loading } = useContext(AuthContext);
   const location = useLocation();
 
+
   // Custom hooks to check admin and employee status
   const [isAdmin, isAdminLoading] = useAdmin(adminData?.admin_email);
   const [isEmployee, isEmployeeLoading] = useEmployee(employeeData?.emp_email);
@@ -16,6 +17,7 @@ const AdminEmployeePrivateRoute = ({ children }) => {
   if (loading) {
     <CustomSpinner />;
   }
+
   if (adminData) {
     // If adminData exists and isAdmin is true, allow access to children
     if (isAdmin) {

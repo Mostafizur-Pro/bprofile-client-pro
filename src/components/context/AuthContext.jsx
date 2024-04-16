@@ -10,8 +10,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Add state for user
   const [employee, setEmployee] = useState(null);
 
-  // console.log('user', user)
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     const clientData = JSON.parse(localStorage.getItem("client") || "null");
@@ -29,21 +27,21 @@ export const AuthProvider = ({ children }) => {
     setLoading(false); // Set loading to false after data is fetched
   }, []);
 
-  const login = (token, userData, clientData, adminData, employeeData) => {
+  const login = (token, userLogin, clientLogin, adminLogin, employeeLogin) => {
     setIsAuthenticated(true);
 
-    if (clientData) {
-      setClient(clientData);
-      localStorage.setItem("client", JSON.stringify(clientData));
-    } else if (adminData) {
-      setAdmin(adminData);
-      localStorage.setItem("admin", JSON.stringify(adminData));
-    } else if (userData) {
-      setUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
-    } else if (employeeData) {
-      setEmployee(employeeData);
-      localStorage.setItem("employee", JSON.stringify(employeeData));
+    if (clientLogin) {
+      setClient(clientLogin);
+      localStorage.setItem("client", JSON.stringify(clientLogin));
+    } else if (adminLogin) {
+      setAdmin(adminLogin);
+      localStorage.setItem("admin", JSON.stringify(adminLogin));
+    } else if (userLogin) {
+      setUser(userLogin);
+      localStorage.setItem("user", JSON.stringify(userLogin));
+    } else if (employeeLogin) {
+      setEmployee(employeeLogin);
+      localStorage.setItem("employee", JSON.stringify(employeeLogin));
     }
 
     localStorage.setItem("token", token);
@@ -95,10 +93,6 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         isAuthenticated,
-        client,
-        admin,
-        employee,
-        user,
         userData,
         clientData,
         adminData,

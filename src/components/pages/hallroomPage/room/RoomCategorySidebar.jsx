@@ -16,10 +16,11 @@ import {
 import { Link } from "react-router-dom";
 import locationData from "../../../../../public/location.json";
 import { useAuth } from "@/components/context/AuthContext";
+import LoginProfile from "@/utils/loginProfile";
 
 // profile
 const ProfileSidebar = () => {
-  const { clientData, logout, adminData, userData } = useAuth();
+  const { clientData, logout, adminData, userData, employeeData } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -33,13 +34,21 @@ const ProfileSidebar = () => {
         to={
           adminData
             ? "/dashboard/profile"
+            : employeeData
+            ? "/dashboard/employee_profile"
             : clientData
-            ? `/profile/${clientData?.id}`
+            ? `/profile/${clientData?.profile_id}`
             : "/"
         }
       >
         <div className="flex items-center gap-4">
-          <div>
+          <LoginProfile
+            clientData={clientData}
+            adminData={adminData}
+            userData={userData}
+            employeeData={employeeData}
+          />
+          {/* <div>
             {adminData && (
               <div className="border-2 border-primary_blue p-1 rounded-full">
                 <img
@@ -88,13 +97,34 @@ const ProfileSidebar = () => {
                 alt="profile"
               />
             )}
-          </div>
-          <div>
+            {employeeData && (
+              <img
+                className="w-8 h-8 object-cover rounded-full"
+                src={
+                  employeeData?.image ===
+                    "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png" ||
+                  employeeData?.image ===
+                    "https://www.vhv.rs/dpng/d/15-155087_dummy-image-of-user-hd-png-download.png"
+                    ? employeeData?.image
+                    : `${
+                        import.meta.env.VITE_LOCAL_API_URL
+                      }/api/v1/images/uploads/${employeeData?.image}`
+                }
+                alt="profile"
+              />
+            )}
+          </div> */}
+          {/* <div>
             <p className="font-semibold text-[16px] md:text-[18px] capitalize">
-              {clientData?.name || adminData?.name || userData?.name}
+              {clientData?.name ||
+                adminData?.name ||
+                userData?.name ||
+                employeeData?.name}
             </p>
-            <p>{clientData?.role || adminData?.role}</p>
-          </div>
+            <p>
+              {clientData?.role || adminData?.role || employeeData?.emp_role}
+            </p>
+          </div> */}
         </div>
       </Link>
       {/* <p>{adminData?.image}</p> */}
@@ -113,6 +143,8 @@ const ProfileSidebar = () => {
                 to={
                   adminData
                     ? "/dashboard/profile"
+                    : employeeData
+                    ? "/dashboard/employee_profile"
                     : clientData
                     ? `/profile/${clientData?.profile_id}`
                     : "/"

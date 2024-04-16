@@ -14,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
   // const from = location.state?.from?.pathname || "/";
   const [googleButtonLoading, setGoogleButtonLoading] = useState(false);
-  // const from = location.state?.from?.pathname || "/";
+  
 
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState("");
@@ -67,25 +67,24 @@ const Login = () => {
 
       const {
         accessToken: token,
-        users: userData,
-        clients: clientData,
-        employees: employeeData,
+        users: userLogin,
+        clients: clientLogin,
+        employees: employeeLogin,
       } = response.data;
 
-      console.log("response", response.data);
+      // console.log("response", response.data);
 
-      if (userData) {
+      if (userLogin) {
         // Regular user login
-        login(token, userData);
+        login(token, userLogin);
         navigate("/room"); // Redirect to the appropriate page for the user
-      } else if (clientData) {
+      } else if (clientLogin) {
         // Client login
-        login(token, null, clientData);
+        login(token, null, clientLogin);
         navigate("/room"); // Redirect to the appropriate page for the client
-      } else if (employeeData) {
+      } else if (employeeLogin) {
         // Employee login
-        login(token, null, null, null, employeeData);
-        console.log("emp", employeeData);
+        login(token, null, null, null, employeeLogin);
         navigate("/room"); // Redirect to the appropriate page for the employee
       } else {
         // Handle unexpected response
