@@ -45,6 +45,7 @@ import Employee_Profile from "../pages/dashboard/employee/employee_profile/Emplo
 import AdminEmployeePrivateRoute from "./AdminEmployeeRoute/AdminEmployeePrivateRoute";
 import LoginRoute from "./LoginRoute/LoginRoute";
 import AllEmpClientsList from "../pages/dashboard/employee/profileLists/AllEmpClientList";
+import DashboardRegister from "../pages/auth/register/DashboardRegister";
 
 const router = createBrowserRouter([
   // Home
@@ -247,6 +248,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/employee-register",
         element: <EmployeeRegister />,
+      },
+      {
+        path: "/dashboard/client-register",
+        element: <DashboardRegister />,
       },
 
       // posts

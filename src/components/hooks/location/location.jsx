@@ -157,6 +157,7 @@ const MyLocation = ({
           label="Select Division"
           placeholder="Select Division"
           onChange={(e) => handleDivisionChange(e.target.value)}
+          required
         />
       </div>
       {selectedDivision && (
@@ -177,6 +178,7 @@ const MyLocation = ({
             placeholder="Select District"
             onChange={(e) => handleDistrictChange(e.target.value)}
             disabled={!selectedDivision}
+            required
           />
         </div>
       )}
@@ -189,6 +191,7 @@ const MyLocation = ({
             placeholder="Select Thana"
             onChange={(e) => handleThanaChange(e.target.value)}
             disabled={!selectedDistrict}
+            required
           />
         </div>
       )}
@@ -226,6 +229,7 @@ const MyLocation = ({
             value={roadNumber}
             onChange={(e) => setRoadNumber(e.target.value)}
             disabled={!selectedWard}
+            required
           />
         </div>
       )}

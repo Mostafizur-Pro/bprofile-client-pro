@@ -37,11 +37,6 @@ const MyCategory = ({
 
   const handleSubcategoryChange = (selectedSubcategory) => {
     setSelectedSubcategory(selectedSubcategory);
-    // Pass selected category and subcategory to parent component
-    // setCategory({
-    //   category: selectedCategory,
-    //   subcategory: selectedSubcategory,
-    // });
   };
 
   return (
@@ -56,6 +51,7 @@ const MyCategory = ({
           label="Select Category"
           placeholder="Select Category"
           onChange={(e) => handleCategoryChange(e.target.value)}
+          required
         />
       </div>
       {selectedCategory && (
@@ -76,6 +72,7 @@ const MyCategory = ({
             label="Select Subcategory"
             placeholder="Select Subcategory"
             onChange={(e) => handleSubcategoryChange(e.target.value)}
+            required
           />
         </div>
       )}
