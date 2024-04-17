@@ -46,8 +46,8 @@ const AdminProfileTab = ({ activeTab, setActiveTab }) => {
 };
 
 const Admin_Profile = () => {
-  const { admin, changePassword } = useAuth();
-  const [adminData, setAdminData] = useState(null);
+  const { adminData, changePassword } = useAuth();
+
   const [activeTab, setActiveTab] = useState("profile_details");
   const [openCategoryModal, setOpenCategoryModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -56,20 +56,6 @@ const Admin_Profile = () => {
     phone: "",
     role: "",
   });
-
-  
-
-  useEffect(() => {
-    if (admin) {
-      setAdminData(admin[0]);
-      setFormData({
-        name: admin[0]?.name || "",
-        email: admin[0]?.admin_email || "",
-        phone: admin[0]?.number || "",
-        role: admin[0]?.role || "",
-      });
-    }
-  }, [admin]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -110,7 +96,7 @@ const Admin_Profile = () => {
     }
   };
   return (
-    <div className="pt-16 grid grid-cols-9">
+    <div className="pt-16 grid grid-cols-9 gap-3">
       {/* edit modal  */}
       <Modal
         className="rounded-[8px]"
@@ -129,44 +115,49 @@ const Admin_Profile = () => {
                   <TextInput
                     label="Name"
                     name="name"
-                    value={formData.name}
+                    value={adminData.name}
                     onChange={handleInputChange}
                   />
                 </div>
-                <div>
-                  <TextInput
-                    label="Email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                  />
-                </div>
+                {adminData?.role === "superAdmin" && (
+                  <div>
+                    <TextInput
+                      label="Email"
+                      name="email"
+                      value={adminData.admin_email}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                )}
+
                 <div>
                   <TextInput
                     label="Phone No"
                     name="phone"
-                    value={formData.phone}
+                    value={adminData.number}
                     onChange={handleInputChange}
                   />
                 </div>
-                <div>
-                  <SelectInput
-                    id="role"
-                    options={[
-                      { value: "SUPER_ADMIN", label: "Super Admin" },
-                      { value: "SUB_ADMIN", label: "Sub Admin" },
-                      { value: "ADMIN", label: "Admin" },
-                      { value: "EDITOR", label: "Editor" },
-                      { value: "ACCOUNT", label: "Account" },
-                    ]}
-                    label="Select Role"
-                    placeholder="Select Role"
-                    value={formData.role}
-                    onChange={(e) =>
-                      setFormData({ ...formData, role: e.target.value })
-                    }
-                  />
-                </div>
+                {adminData?.role === "superAdmin" && (
+                  <div>
+                    <SelectInput
+                      id="role"
+                      options={[
+                        { value: "SUPPER_ADMIN", label: "Super Admin" },
+                        { value: "SUB_ADMIN", label: "Sub Admin" },
+                        { value: "ADMIN", label: "Admin" },
+                        { value: "EDITOR", label: "Editor" },
+                        { value: "ACCOUNT", label: "Account" },
+                      ]}
+                      label="Select Role"
+                      placeholder="Select Role"
+                      value={formData.role}
+                      onChange={(e) =>
+                        setFormData({ ...formData, role: e.target.value })
+                      }
+                    />
+                  </div>
+                )}
                 <div className="flex justify-end">
                   <Button
                     type="button"
@@ -183,7 +174,7 @@ const Admin_Profile = () => {
         </Modal.Body>
       </Modal>
       {/*Not Changing Component  */}
-      <div className="col-span-3 flex flex-col gap-5 items-center justify-center">
+      <div className="col-span-3 flex flex-col gap-5 items-center justify-center hidden lg:block">
         <img
           className="w-[100px] h-[100px] md:w-[300px] md:h-[300px] object-cover"
           src={`${import.meta.env.VITE_LOCAL_API_URL}/api/v1/images/uploads/${
@@ -208,6 +199,13 @@ const Admin_Profile = () => {
         <div>
           <AdminProfileTab setActiveTab={setActiveTab} activeTab={activeTab} />
         </div>
+        <img
+          className="w-[100px] h-[100px] md:w-[300px] md:h-[300px] object-cover block lg:hidden"
+          src={`${import.meta.env.VITE_LOCAL_API_URL}/api/v1/images/uploads/${
+            adminData?.image
+          }`}
+          alt=""
+        />
         {activeTab === "profile_details" && (
           <div className="flex-grow space-y-2 rounded-[10px]">
             <div>

@@ -38,15 +38,30 @@ const ViewAction = ({ admins }) => {
                 <br />
               </h2>
               <h2 className="text-sm">
-                Number: <span className="font-semibold">{admins?.number}</span>
+                <span className="font-semibold">Organization: </span>
+                {admins?.organization_name}
               </h2>
               <h2 className="text-sm">
-                Email:{" "}
-                <span className="font-semibold">{admins?.admin_email}</span>
+                <span className="font-semibold">Number: </span>
+                {admins?.number}
+              </h2>
+
+              {admins?.admin_email && (
+                <h2 className="text-sm">
+                  <span className="font-semibold">Email: </span>
+                  {admins?.admin_email}
+                </h2>
+              )}
+
+              <h2 className="text-sm">
+                <span className="font-semibold">Category: </span>
+                {admins?.subcategories},{admins?.category}
               </h2>
               <h2 className="text-sm">
-                Role:{" "}
-                <span className="font-semibold capitalize">{admins?.role}</span>
+               
+                <span className="font-semibold">Address: </span>
+                {admins?.road},{admins?.localArea}, {admins?.ward},{" "}
+                  {admins?.thana}, {admins?.district}, {admins?.division}
               </h2>
             </div>
           </div>

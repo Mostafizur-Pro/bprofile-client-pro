@@ -4,25 +4,83 @@ import { AiFillWarning } from "react-icons/ai";
 import { TiDelete } from "react-icons/ti";
 import { Button } from "../ui/button";
 import { AlertDialog, AlertDialogContent } from "../ui/alert-dialog";
+import { useMutation, useQueryClient } from "react-query";
 
 const DeleteAction = ({ handleDeleteSubmit, isLoading }) => {
   const [open, setOpen] = useState(false);
+  const queryClient = useQueryClient();
+  const deleteAdminMutation = useMutation(
+    async () => {
+      const url = `${
+        import.meta.env.VITE_LOCAL_API_URL
+      }/api/v1/admin/${handleDeleteSubmit}`;
+      const response = await fetch(url, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete admin");
+      }
+
+      return response.json(); // Assuming the API returns some data after successful deletion
+    },
+    {
+      onSuccess: () => {
+        // Invalidate the 'admins' query in the cache to trigger a refetch
+        queryClient.invalidateQueries("admins");
+        toast({
+          description: "Deleted Successfully!",
+        });
+        setOpen(false); // Close the dialog after successful deletion
+      },
+      onError: (error) => {
+        // Handle errors from the delete operation
+        console.error("Delete admin error:", error);
+        toast({
+          description: "Failed to delete admin",
+          type: "error",
+        });
+      },
+    }
+  );
 
   const handleDelete = useCallback(async () => {
     try {
-      await handleDeleteSubmit();
+      await deleteAdminMutation.mutateAsync();
+    } catch (error) {
+      console.error("Delete admin error:", error);
       toast({
-        description: `Deleted Successfully!`,
+        description: "Failed to delete admin",
+        type: "error",
       });
-      setOpen(!open);
-    } catch (err) {
-      for (let key of err.errors) {
-        toast({
-          description: `${key?.attr}- ${key?.detail}`,
-        });
-      }
     }
-  }, [handleDeleteSubmit, open]);
+  }, [deleteAdminMutation]);
+
+  // const handleDelete = useCallback(async () => {
+  //   try {
+  //     const url = `${
+  //       import.meta.env.VITE_LOCAL_API_URL
+  //     }/api/v1/admin/${handleDeleteSubmit}`;
+  //     const response = await fetch(url, {
+  //       method: "DELETE",
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to delete admin");
+  //     }
+
+  //     toast({
+  //       description: `Deleted Successfully!`,
+  //     });
+  //     setOpen(!open);
+  //   } catch (err) {
+  //     for (let key of err.errors) {
+  //       toast({
+  //         description: `${key?.attr}- ${key?.detail}`,
+  //       });
+  //     }
+  //   }
+  // }, [handleDeleteSubmit, open]);
 
   return (
     <div>

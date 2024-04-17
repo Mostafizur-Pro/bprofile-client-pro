@@ -16,9 +16,16 @@ https://zustand-demo.pmnd.rs/
 admin Profile :
 src={`${import.meta.env.VITE_LOCAL_API_URL}/api/v1/images/uploads/${admin?.image}`}
 
-  src={admins?.image ==="https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png"
-                      ? admins?.image: `${ import.meta.env.VITE_LOCAL_API_URL
-                        }/api/v1/images/uploads/${admins?.image}`}
+ src={admins?.image ===
+                "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png"
+                  ? admins?.image :
+                admins?.image ===
+                "https://www.vhv.rs/dpng/d/15-155087_dummy-image-of-user-hd-png-download.png"
+                  ? admins?.image
+                  : `${
+                      import.meta.env.VITE_LOCAL_API_URL
+                    }/api/v1/images/uploads/${admins?.image}`
+              }
 
 
 client Profile :

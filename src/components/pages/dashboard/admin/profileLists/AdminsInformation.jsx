@@ -24,6 +24,8 @@ const AdminsInformation = () => {
     return <div>Error: {error}</div>;
   }
 
+
+
   const DashboardColumns = [
     {
       title: "Serial",
@@ -41,6 +43,9 @@ const AdminsInformation = () => {
               src={
                 admins?.image ===
                 "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png"
+                  ? admins?.image
+                  : admins?.image ===
+                    "https://www.vhv.rs/dpng/d/15-155087_dummy-image-of-user-hd-png-download.png"
                   ? admins?.image
                   : `${
                       import.meta.env.VITE_LOCAL_API_URL
@@ -81,10 +86,12 @@ const AdminsInformation = () => {
       row: (admins) => (
         <div className="flex">
           <DeleteAction
-            handleDeleteSubmit={() => undefined}
+            // handleDeleteSubmit={() => undefined}
+            handleDeleteSubmit={admins?.profile_id}
+            // onDelete={handleDeleteUser}
             isLoading={false}
           />
-          <EditAction admins={admins} />          
+          <EditAction admins={admins} />
           <ViewAction admins={admins} />
         </div>
       ),

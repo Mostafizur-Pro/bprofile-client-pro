@@ -32,7 +32,7 @@ const Admin = () => {
       name,
       role,
       number,
-      email,
+      admin_email : email,
       password,
     };
 
@@ -53,7 +53,7 @@ const Admin = () => {
         // eslint-disable-next-line no-unused-vars
         const responseData = await response.json();
         // console.log("Registration successful:", responseData);
-        navigate("/admin");
+        navigate("/dashboard/admin-info");
         // Handle success scenario here (e.g., redirect user, show success message)
       } else {
         // Request failed
@@ -70,7 +70,7 @@ const Admin = () => {
 
   return (
     <div className="bg-white p-5 max-w-md mx-auto rounded shadow-2xl border w-full">
-      <h2 className="text-3xl px-4 ">Admin Sign up</h2>
+      <h2 className="text-3xl px-4 ">Admin Registration</h2>
       <form className="mt-10 space-y-4" onSubmit={handleSubmit}>
         <div>
           <TextInput
@@ -93,7 +93,7 @@ const Admin = () => {
           placeholder="Select Role"
           onChange={(e) => setRole(e.target.value)}
         />
-
+{/* 'SUPPER_ADMIN','SUB_ADMIN','ADMIN','EDITOR','ACCOUNT' */}
         <div>
           <TextInput
             id={"number"}
@@ -104,9 +104,10 @@ const Admin = () => {
         </div>
         <div>
           <TextInput
-            id={"email"}
+            id={"admin_email"}
             label={"Enter Email"}
             type="email"
+            name="admin_email"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>

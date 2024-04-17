@@ -95,7 +95,7 @@ const OurClient = () => {
     }
   };
 
-  console.log("client", clients);
+  // console.log("client", clients);
 
   return (
     <section className="b_profile_container  py-40 relative">
@@ -257,6 +257,7 @@ const OurClient = () => {
           <Client client={client} key={idx} />
         ))}
       </div>
+      {/* Pagination */}
       <div className="flex  items-center justify-center mt-10">
         <nav aria-label="Page navigation example">
           <ul className="flex flex-wrap items-center -space-x-px h-12 text-sm">

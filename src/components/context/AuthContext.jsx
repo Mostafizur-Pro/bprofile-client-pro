@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    window.location.reload();
     setIsAuthenticated(false);
     setClient(null);
     setAdmin(null);

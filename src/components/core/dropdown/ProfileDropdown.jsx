@@ -13,8 +13,10 @@ import { Link } from "react-router-dom";
 const ProfileDropdown = () => {
   const { clientData, adminData, logout, userData, employeeData } = useAuth();
 
+
   const handleLogout = () => {
     logout();
+    
   };
   // need to send the props to work properly
   //  use isAdmin props to define the routes for admin ,so we can use it in both  adminns and normal user

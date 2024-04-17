@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import ClientList from "./ClientList";
 import PaidClientList from "./PaidClients";
 
@@ -40,7 +40,7 @@ const AllEmpClientsList = () => {
   return (
     <div className="mt-6 ">
       <p className="text-3xl font-semibold  text-start mb-2">
-        {(activeTab === "clients" && "All Clients Informations") ||
+        {(activeTab === "clients" && "All Clients Information") ||
           (activeTab === "paid_clients" && "List of paid Clients ")}
       </p>
       <div className="flex items-center justify-start">

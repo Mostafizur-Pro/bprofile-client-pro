@@ -118,15 +118,20 @@ const AdminLeftAside = () => {
               )}
               {adminData && (
                 <>
-                  {/* Admin */}
-                  <AccordionContent
-                    className={` mt-2 px-3.5 py-2.5 ${
-                      location.pathname === "/dashboard/admin-info" &&
-                      "font-semibold bg-secondary_main rounded-[6px] text-white"
-                    }`}
-                  >
-                    <Link to={"/dashboard/admin-info"}>Admins Info</Link>
-                  </AccordionContent>
+                {/* Admin */}
+                  {adminData?.role === "SUPPER_ADMIN" ||
+                    (adminData?.role === "superAdmin" && (
+                      
+                      <AccordionContent
+                        className={` mt-2 px-3.5 py-2.5 ${
+                          location.pathname === "/dashboard/admin-info" &&
+                          "font-semibold bg-secondary_main rounded-[6px] text-white"
+                        }`}
+                      >
+                        <Link to={"/dashboard/admin-info"}>Admins Info</Link>
+                      </AccordionContent>
+                    ))}
+                  
 
                   {/* Client */}
                   <AccordionContent

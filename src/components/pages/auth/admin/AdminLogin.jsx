@@ -42,10 +42,8 @@ const AdminLogin = () => {
 
       login(token, null, null, adminData); // Pass null for clientData
 
-      if (token) {
-        navigate("/dashboard");
-        // navigate(from, { replace: true });
-      }
+      navigate("/dashboard/profile");
+      // navigate(from, { replace: true });
     } catch (error) {
       setError("Invalid email or password.");
     }

@@ -33,7 +33,6 @@ import AllHallroomPosts from "../pages/dashboard/admin/posts/AllHallroomPosts";
 import AdminLogin from "../pages/auth/admin/AdminLogin";
 import AdminRegister from "../pages/auth/admin/AdminRegister";
 import AdminRoute from "./AdminRoute/AdminRoute";
-import AdminPrivateRoute from "./AdminRoute/AdminPrivateRoute";
 import OurClient from "../pages/members/ourClient/OurClient";
 import EmployeeRegister from "../pages/auth/employee/EmployeeRegister";
 import Packages from "../pages/publicPage/package/Packages";
@@ -43,7 +42,6 @@ import OurEmployee from "../pages/members/ourEmployee/OurEmployee";
 import AllProviderRoute from "./AdminRoute/AllProviderRoute";
 import Employee_Profile from "../pages/dashboard/employee/employee_profile/Employee_Profile";
 import AdminEmployeePrivateRoute from "./AdminEmployeeRoute/AdminEmployeePrivateRoute";
-import LoginRoute from "./LoginRoute/LoginRoute";
 import AllEmpClientsList from "../pages/dashboard/employee/profileLists/AllEmpClientList";
 import DashboardRegister from "../pages/auth/register/DashboardRegister";
 
