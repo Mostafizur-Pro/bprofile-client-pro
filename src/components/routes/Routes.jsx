@@ -44,6 +44,7 @@ import Employee_Profile from "../pages/dashboard/employee/employee_profile/Emplo
 import AdminEmployeePrivateRoute from "./AdminEmployeeRoute/AdminEmployeePrivateRoute";
 import AllEmpClientsList from "../pages/dashboard/employee/profileLists/AllEmpClientList";
 import DashboardRegister from "../pages/auth/register/DashboardRegister";
+import EmployeeClientList from "../pages/dashboard/admin/profileLists/EmployeeClientList";
 
 const router = createBrowserRouter([
   // Home
@@ -194,6 +195,16 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/employee-list",
         element: <EmployeeList />,
+      },
+      {
+        path: "/dashboard/employee-client-list/:id",
+        element: <EmployeeClientList />,
+        loader: ({ params }) =>
+          fetch(
+            `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/employee?searchTerm=${
+              params.id
+            }`
+          ),
       },
       {
         path: "/dashboard/user-list",

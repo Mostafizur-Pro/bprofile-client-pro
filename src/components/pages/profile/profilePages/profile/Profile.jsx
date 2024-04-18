@@ -20,7 +20,7 @@ const ProfileTopCard = () => {
     }
   }, [clientData]);
 
-  console.log("client", client);
+  // console.log("client", client);
   return (
     <div className="flex flex-col md:flex-row items-center md:items-start  gap-5">
       <div className="flex  items-center justify-center md:justify-start">

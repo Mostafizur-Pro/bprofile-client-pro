@@ -5,6 +5,7 @@ import { RiEditCircleFill } from "react-icons/ri";
 import SelectInput from "./inputs/TextSelect";
 import { toast } from "../ui/use-toast";
 import { useQueryClient } from "react-query";
+import TextInput from "./inputs/TextInput";
 
 const EditAction = ({ admins }) => {
   const [open, setOpen] = useState(false);
@@ -32,13 +33,12 @@ const EditAction = ({ admins }) => {
     const formDataWithFile = new FormData();
     formDataWithFile.append("name", formData.name);
     formDataWithFile.append("number", formData.number);
-    formDataWithFile.append("admin_email", formData.admin_email);
+    formDataWithFile.append("admin_email", formData?.admin_email);
     formDataWithFile.append("role", formData.role);
     formDataWithFile.append("image", e.target.image.files[0]);
 
+    // console.log("formData", formData);
     try {
-      // console.log("formData", formData);
-
       const response = await fetch(
         `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/admin/${
           admins?.profile_id
@@ -96,20 +96,39 @@ const EditAction = ({ admins }) => {
                   }
                   alt={admins?.image}
                 />
-
-                <input
-                  type="file"
-                  id={"image"}
-                  name="image"
-                  // value={formData.image}
-                  onChange={handleInputChange}
-                  className="mb-3 border-b-2 border-gray-300 focus:border-blue-500 outline-none"
-                  placeholder="image"
-                />
               </div>
 
               <div className="col-span-3">
-                <input
+                <div className="mb-3">
+                  <TextInput
+                    label="Name"
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <TextInput
+                    id={"number"}
+                    label="Number"
+                    type="text"
+                    name="number"
+                    value={formData.number}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <TextInput
+                    id={"admin_email"}
+                    label="Email"
+                    type="text"
+                    name="admin_email"
+                    value={formData.admin_email}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                {/* <input
                   type="text"
                   id={"name"}
                   name="name"
@@ -117,8 +136,8 @@ const EditAction = ({ admins }) => {
                   onChange={handleInputChange}
                   className="mb-3 border-b-2 border-gray-300 focus:border-blue-500 outline-none"
                   placeholder="Name"
-                />
-                <input
+                /> */}
+                {/* <input
                   type="text"
                   id={"number"}
                   name="number"
@@ -126,15 +145,15 @@ const EditAction = ({ admins }) => {
                   onChange={handleInputChange}
                   className="mb-3 border-b-2 border-gray-300 focus:border-blue-500 outline-none"
                   placeholder="Number"
-                />
-                <input
+                /> */}
+                {/* <input
                   type="text"
                   name="admin_email"
                   value={formData.admin_email}
                   onChange={handleInputChange}
                   className="mb-3 border-b-2 border-gray-300 focus:border-blue-500 outline-none"
                   placeholder="Email"
-                />
+                /> */}
                 {/* <input
                   type="text"
                   name="role"
@@ -157,6 +176,16 @@ const EditAction = ({ admins }) => {
                   placeholder={formData.role}
                   value={formData.role}
                   onChange={handleInputChange}
+                />
+
+                <input
+                  type="file"
+                  id={"image"}
+                  name="image"
+                  // value={formData.image}
+                  onChange={handleInputChange}
+                  className="mb-3 border-b-2 border-gray-300 focus:border-blue-500 outline-none"
+                  placeholder="image"
                 />
               </div>
             </div>

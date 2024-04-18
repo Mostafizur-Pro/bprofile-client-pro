@@ -1,13 +1,11 @@
-import DeleteAction from "@/components/core/DeleteAction";
-import EditAction from "@/components/core/EditAction";
-import ViewAction from "@/components/core/ViewAction";
 import CustomSpinner from "@/components/core/spinner/Spinner";
 import DashboardTable from "@/components/core/table/DashboardTable";
-import useGetData from "@/components/hooks/hallRoom/hallRoom";
-import { formatDateString } from "@/utils/getCurrentDate";
+import useEmployeeGetData from "@/components/hooks/employee/employee";
+import { FaEye } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const EmployeeList = () => {
-  const [posts, loading, error] = useGetData(
+  const [employee, loading, error] = useEmployeeGetData(
     `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/employee`
   );
 
@@ -18,77 +16,94 @@ const EmployeeList = () => {
       </div>
     );
   }
-
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-  // console.log("admin", posts);
 
   const DashboardColumns = [
     {
       title: "Client ID",
       dataKey: "client_id",
-      row: (posts) => <span>{posts.profile_id}</span>,
+      row: (employee) => <span>{employee.profile_id}</span>,
     },
     {
       title: "Name",
       dataKey: "name",
-      row: (posts) => (
+      row: (employee) => (
         <div className="flex items-center gap-2">
           <div>
             <img
               className="w-8 h-8 md:w-12 md:h-12 rounded-[10px] object-cover"
-              src={posts.image}
+              // src={employee.image}
+              src={
+                employee?.image ===
+                  "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png" ||
+                employee?.image ===
+                  "https://www.vhv.rs/dpng/d/15-155087_dummy-image-of-user-hd-png-download.png"
+                  ? employee?.image
+                  : `${
+                      import.meta.env.VITE_LOCAL_API_URL
+                    }/api/v1/images/uploads/${employee?.image}`
+              }
               alt=""
             />
           </div>
           <div>
-            <p className="font-semibold">{posts.name} </p>
-            <p>{posts.division}</p>
+            <p className="font-semibold">{employee.name} </p>
+            <p>{employee.division}</p>
           </div>
         </div>
       ),
     },
     // {
-    //   title: "Employee ID",
-    //   dataKey: "employee_id",
-    //   row: () => (
-    //     <div>
-    //       <p className="font-bold">{posts.division}</p>
-    //     </div>
-    //   ),
+    //   title: "Client",
+    //   dataKey: "client",
+    //   row: (employee) => {
+    //     const [clients, loadingClients, errorClients] = useGetClientData(
+    //       `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/client?searchTerm=${
+    //         employee?.profile_id
+    //       }`
+    //     );
+
+    //     if (loadingClients) {
+    //       return <CustomSpinner />;
+    //     }
+
+    //     if (errorClients) {
+    //       return <div>Error: {errorClients.message}</div>;
+    //     }
+
+    //     return <p>Total Clients: {clients.length}</p>;
+    //   },
     // },
     {
       title: "Contact",
       dataKey: "contact",
-      row: (posts) => (
+      row: (employee) => (
         <div>
-          <p>{posts.number}</p>
-          <p>{posts.email}</p>
-        </div>
-      ),
-    },
-    {
-      title: "date",
-      dataKey: "date",
-      row: (posts) => (
-        <div>
-          <p>{formatDateString(posts.createdAt)}</p>
+          <p>{employee.emp_number}</p>
+          <p>{employee.emp_email}</p>
         </div>
       ),
     },
     {
       title: "Action",
       dataKey: "action",
-      row: () => (
+      row: (employee) => (
         <div className="flex items-center">
-          <DeleteAction
+          {/* <DeleteAction
             handleDeleteSubmit={() => undefined}
             isLoading={false}
           />
-          <EditAction admins={posts} />
-          <ViewAction admins={posts} />
+          <EditAction admins={employee} /> */}
+          {/* <ViewAction admins={employee} /> */}
+          {/* <EmployeeClientList employee={employee} /> */}
+          <Link
+            rel="stylesheet"
+            to={`/dashboard/employee-client-list/${employee?.profile_id}`}
+          >
+            <FaEye className="text-blue-500 text-3xl" />
+          </Link>
         </div>
       ),
     },
@@ -99,10 +114,10 @@ const EmployeeList = () => {
   return (
     <div className="space-y-5">
       <p className="text-3xl font-semibold  text-start mt-6">
-        All Employee Informations
+        All Employee Information
       </p>
       <DashboardTable
-        data={posts}
+        data={employee}
         columns={DashboardColumns}
         isLoading={false}
       />

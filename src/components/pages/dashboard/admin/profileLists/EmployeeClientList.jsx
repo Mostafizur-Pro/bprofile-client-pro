@@ -1,14 +1,13 @@
-import { useAuth } from "@/components/context/AuthContext";
-import EditAction from "@/components/core/EditAction";
-import ViewAction from "@/components/core/ViewAction";
 import CustomSpinner from "@/components/core/spinner/Spinner";
 import DashboardTable from "@/components/core/table/DashboardTable";
 import useGetClientData from "@/components/hooks/client/client";
-
 import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
-const ClientList = () => {
-  const { employeeData } = useAuth();
+const EmployeeClientList = () => {
+  const employeeData = useLoaderData();
+
+  // console.log("empClientData", employeeData.data[0].profile_id);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
@@ -18,18 +17,12 @@ const ClientList = () => {
     limit: itemsPerPage,
   });
   const apiUrl = import.meta.env.VITE_LOCAL_API_URL;
-  const url = `${apiUrl}/api/v1/client?${queryParams}&searchTerm=${employeeData?.profile_id}`;
+  const url = `${apiUrl}/api/v1/client?${queryParams}&searchTerm=${employeeData.data[0].profile_id}`;
 
-  const [clients, loading, error, grandTotal] = useGetClientData(
+  const [clients, loading, error, grandTotal, refetch] = useGetClientData(
     url,
     currentPage
   );
-
-  // const [clients, loading, error, grandTotal] = useGetClientData(
-  //   `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/client?searchTerm=${
-  //     employeeData?.profile_id
-  //   }`
-  // );
 
   if (loading) {
     return (
@@ -42,8 +35,6 @@ const ClientList = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-  // console.log("admin", grandTotal);
 
   const DashboardColumns = [
     {
@@ -110,21 +101,21 @@ const ClientList = () => {
     //     </div>
     //   ),
     // },
-    {
-      title: "Action",
-      dataKey: "action",
-      row: (clients) => (
-        <div className="flex items-center">
-          <ViewAction admins={clients} />
-          {clients?.image ===
-            "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png" && (
-            <>
-              <EditAction admins={clients} />
-            </>
-          )}
-        </div>
-      ),
-    },
+    // {
+    //   title: "Action",
+    //   dataKey: "action",
+    //   row: (clients) => (
+    //     <div className="flex items-center">
+    //       <ViewAction admins={clients} />
+    //       {clients?.image ===
+    //         "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png" && (
+    //         <>
+    //           <EditAction admins={clients} />
+    //         </>
+    //       )}
+    //     </div>
+    //   ),
+    // },
   ];
 
   const totalPages = Math.ceil(grandTotal / itemsPerPage);
@@ -146,11 +137,12 @@ const ClientList = () => {
     }
   };
 
-  // fetch data and pass from here while replacing the [...new array(5)]
-
   return (
     <div>
-      {/* <div>Total Clients: {grandTotal}</div> */}
+      <p className="text-3xl font-semibold  text-start my-6">
+        Employee : {grandTotal} Clients Information
+      </p>
+
       <div className="space-y-5">
         <DashboardTable
           data={clients}
@@ -229,4 +221,7 @@ const ClientList = () => {
     </div>
   );
 };
-export default ClientList;
+
+export default EmployeeClientList;
+
+// http://localhost:5173/dashboard/employee-client-list/BP0224F0001

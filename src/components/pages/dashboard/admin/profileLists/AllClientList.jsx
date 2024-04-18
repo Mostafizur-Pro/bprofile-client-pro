@@ -40,7 +40,7 @@ const AllClientsList = () => {
   return (
     <div className="mt-6 ">
       <p className="text-3xl font-semibold  text-start mb-2">
-        {(activeTab === "clients" && "All Clients Informations") ||
+        {(activeTab === "clients" && "All Clients Information") ||
           (activeTab === "old_clients" && "List of Old Clients ")}
       </p>
       <div className="flex items-center justify-start">

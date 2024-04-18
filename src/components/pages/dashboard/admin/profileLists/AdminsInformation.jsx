@@ -69,15 +69,15 @@ const AdminsInformation = () => {
         </div>
       ),
     },
-    // {
-    //   title: "date",
-    //   dataKey: "date",
-    //   row: (admins) => (
-    //     <div>
-    //       <p>{formatDateString(admins.createdAt)}</p>
-    //     </div>
-    //   ),
-    // },
+    {
+      title: "Email",
+      dataKey: "Email",
+      row: (admins) => (
+        <div>
+          <p>{admins?.admin_email}</p>
+        </div>
+      ),
+    },
     {
       title: "Action",
       dataKey: "action",

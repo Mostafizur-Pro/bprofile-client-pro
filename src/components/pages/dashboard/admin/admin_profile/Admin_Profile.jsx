@@ -108,7 +108,7 @@ const Admin_Profile = () => {
           <div className="p-10">
             <div className="max-w-sm mx-auto">
               <p className="text-xl md:text-2xl font-semibold mb-6">
-                Basic Information
+                Admin Information
               </p>
               <form onSubmit={handleSubmit} className="space-y-2">
                 <div>

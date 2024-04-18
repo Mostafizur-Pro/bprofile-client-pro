@@ -100,14 +100,17 @@ const PaidClientsList = () => {
 
   return (
     <div className="space-y-5">
-      <p className="text-3xl font-semibold  text-center">
+      <p className="text-3xl font-semibold text-red-400 text-center my-10">
+        Need Work
+      </p>
+      {/* <p className="text-3xl font-semibold  text-center">
         All Paid Clients Information
       </p>
       <DashboardTable
         data={clients}
         columns={DashboardColumns}
         isLoading={false}
-      />
+      /> */}
     </div>
   );
 };
