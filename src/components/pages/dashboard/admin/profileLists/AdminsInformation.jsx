@@ -5,8 +5,6 @@ import CustomSpinner from "@/components/core/spinner/Spinner";
 import DashboardTable from "@/components/core/table/DashboardTable";
 import useGetAdminData from "@/components/hooks/admin/admin";
 
-import { formatDateString } from "@/utils/getCurrentDate";
-
 const AdminsInformation = () => {
   const [admins, loading, error] = useGetAdminData(
     `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/admin`
@@ -71,28 +69,26 @@ const AdminsInformation = () => {
         </div>
       ),
     },
-    {
-      title: "date",
-      dataKey: "date",
-      row: (admins) => (
-        <div>
-          <p>{formatDateString(admins.createdAt)}</p>
-        </div>
-      ),
-    },
+    // {
+    //   title: "date",
+    //   dataKey: "date",
+    //   row: (admins) => (
+    //     <div>
+    //       <p>{formatDateString(admins.createdAt)}</p>
+    //     </div>
+    //   ),
+    // },
     {
       title: "Action",
       dataKey: "action",
       row: (admins) => (
         <div className="flex">
           <DeleteAction
-            // handleDeleteSubmit={() => undefined}
             handleDeleteSubmit={admins?.profile_id}
-            // onDelete={handleDeleteUser}
             isLoading={false}
           />
           <EditAction admins={admins} />
-          <ViewAction admins={admins} />
+          {/* <ViewAction admins={admins} /> */}
         </div>
       ),
     },

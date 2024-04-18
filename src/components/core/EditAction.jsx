@@ -2,14 +2,19 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { AlertDialog, AlertDialogContent } from "../ui/alert-dialog";
 import { RiEditCircleFill } from "react-icons/ri";
+import SelectInput from "./inputs/TextSelect";
+import { toast } from "../ui/use-toast";
+import { useQueryClient } from "react-query";
 
 const EditAction = ({ admins }) => {
   const [open, setOpen] = useState(false);
+
   const [formData, setFormData] = useState({
     name: admins?.name || "",
     number: admins?.number || "",
     admin_email: admins?.admin_email || "",
     role: admins?.role || "",
+    image: admins?.image || "",
   });
 
   const handleInputChange = (e) => {
@@ -20,30 +25,43 @@ const EditAction = ({ admins }) => {
     });
   };
 
+  const queryClient = useQueryClient();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formDataWithFile = new FormData();
+    formDataWithFile.append("name", formData.name);
+    formDataWithFile.append("number", formData.number);
+    formDataWithFile.append("admin_email", formData.admin_email);
+    formDataWithFile.append("role", formData.role);
+    formDataWithFile.append("image", e.target.image.files[0]);
+
     try {
+      // console.log("formData", formData);
+
       const response = await fetch(
         `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/admin/${
           admins?.profile_id
         }`,
         {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            // Add any additional headers if required
-          },
-          body: JSON.stringify(formData),
+          body: formDataWithFile,
+          // headers: {
+          //   "Content-Type": "application/json",
+          // },
+          // body: JSON.stringify(formData),
         }
       );
 
       if (!response.ok) {
-        // Handle error response from the server
         throw new Error("Failed to update admin data");
       }
+      queryClient.invalidateQueries("admins");
+      setOpen(!open);
 
-      // Handle success response from the server
-      console.log("Admin data updated successfully");
+      toast({
+        description: "Admin data updated successfully!",
+      });
     } catch (error) {
       console.error("Error updating admin data:", error.message);
       // Handle error
@@ -69,16 +87,31 @@ const EditAction = ({ admins }) => {
                     admins?.image ===
                     "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png"
                       ? admins?.image
+                      : admins?.image ===
+                        "https://www.vhv.rs/dpng/d/15-155087_dummy-image-of-user-hd-png-download.png"
+                      ? admins?.image
                       : `${
                           import.meta.env.VITE_LOCAL_API_URL
                         }/api/v1/images/uploads/${admins?.image}`
                   }
                   alt={admins?.image}
                 />
+
+                <input
+                  type="file"
+                  id={"image"}
+                  name="image"
+                  // value={formData.image}
+                  onChange={handleInputChange}
+                  className="mb-3 border-b-2 border-gray-300 focus:border-blue-500 outline-none"
+                  placeholder="image"
+                />
               </div>
+
               <div className="col-span-3">
                 <input
                   type="text"
+                  id={"name"}
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
@@ -87,6 +120,7 @@ const EditAction = ({ admins }) => {
                 />
                 <input
                   type="text"
+                  id={"number"}
                   name="number"
                   value={formData.number}
                   onChange={handleInputChange}
@@ -101,13 +135,28 @@ const EditAction = ({ admins }) => {
                   className="mb-3 border-b-2 border-gray-300 focus:border-blue-500 outline-none"
                   placeholder="Email"
                 />
-                <input
+                {/* <input
                   type="text"
                   name="role"
                   value={formData.role}
                   onChange={handleInputChange}
                   className="mb-3 border-b-2 border-gray-300 focus:border-blue-500 outline-none"
                   placeholder="Role"
+                /> */}
+                <SelectInput
+                  id="role"
+                  name="role"
+                  options={[
+                    { value: "SUPPER_ADMIN", label: "Super Admin" },
+                    { value: "SUB_ADMIN", label: "Sub Admin" },
+                    { value: "ADMIN", label: "Admin" },
+                    { value: "EDITOR", label: "Editor" },
+                    { value: "ACCOUNT", label: "Account" },
+                  ]}
+                  label="Select Role"
+                  placeholder={formData.role}
+                  value={formData.role}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
