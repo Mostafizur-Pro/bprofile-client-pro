@@ -1,16 +1,14 @@
-import DeleteAction from "@/components/core/DeleteAction";
-import EditAction from "@/components/core/EditAction";
-import ViewAction from "@/components/core/ViewAction";
 import CustomSpinner from "@/components/core/spinner/Spinner";
 import DashboardTable from "@/components/core/table/DashboardTable";
 import useGetClientData from "@/components/hooks/client/client";
-import { formatDateString } from "@/utils/getCurrentDate";
+
 
 const UserList = () => {
-  const [clients, loading, error] = useGetClientData(
+  const [users, loading, error] = useGetClientData(
     `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/user`
   );
 
+  console.log("user", users);
   if (loading) {
     return (
       <div>
@@ -29,22 +27,22 @@ const UserList = () => {
     {
       title: "Client ID",
       dataKey: "client_id",
-      row: (clients) => <span>{clients.profile_id}</span>,
+      row: (users) => <span>{users.profile_id}</span>,
     },
     {
       title: "Name",
       dataKey: "name",
-      row: (clients) => (
+      row: (users) => (
         <div className="flex items-center gap-2">
           <div>
             <img
               className="w-8 h-8 md:w-12 md:h-12 rounded-[10px] object-cover"
-              src={clients.image}
+              src={users.image}
               alt=""
             />
           </div>
           <div>
-            <p className="font-semibold">{clients.name} </p>
+            <p className="font-semibold">{users.name} </p>
             {/* <p>{clients.}</p> */}
           </div>
         </div>
@@ -54,36 +52,36 @@ const UserList = () => {
     {
       title: "Contact",
       dataKey: "contact",
-      row: (clients) => (
+      row: (users) => (
         <div>
-          <p>{clients.number}</p>
-          <p>{clients.email}</p>
+          <p>{users.number}</p>
+          <p>{users.email}</p>
         </div>
       ),
     },
-    {
-      title: "date",
-      dataKey: "date",
-      row: (clients) => (
-        <div>
-          <p>{formatDateString(clients.createdAt)}</p>
-        </div>
-      ),
-    },
-    {
-      title: "Action",
-      dataKey: "action",
-      row: () => (
-        <div className="flex items-center">
-          <DeleteAction
-            handleDeleteSubmit={() => undefined}
-            isLoading={false}
-          />
-          <EditAction admins={clients} />
-          <ViewAction admins={clients} />
-        </div>
-      ),
-    },
+    // {
+    //   title: "date",
+    //   dataKey: "date",
+    //   row: (users) => (
+    //     <div>
+    //       <p>{formatDateString(users.createdAt)}</p>
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   title: "Action",
+    //   dataKey: "action",
+    //   row: (users) => (
+    //     <div className="flex items-center">
+    //       <DeleteAction
+    //         handleDeleteSubmit={() => undefined}
+    //         isLoading={false}
+    //       />
+    //       <EditAction admins={users} />
+    //       <ViewAction admins={users} />
+    //     </div>
+    //   ),
+    // },
   ];
 
   // fetch data and pass from here while replacing the [...new array(5)]
@@ -94,7 +92,7 @@ const UserList = () => {
         All Users Information
       </p>
       <DashboardTable
-        data={clients}
+        data={users}
         columns={DashboardColumns}
         isLoading={false}
       />

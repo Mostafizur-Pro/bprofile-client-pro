@@ -1,6 +1,5 @@
 import DeleteAction from "@/components/core/DeleteAction";
 import EditAction from "@/components/core/EditAction";
-import ViewAction from "@/components/core/ViewAction";
 import CustomSpinner from "@/components/core/spinner/Spinner";
 import DashboardTable from "@/components/core/table/DashboardTable";
 import useGetAdminData from "@/components/hooks/admin/admin";
@@ -21,8 +20,6 @@ const AdminsInformation = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-
 
   const DashboardColumns = [
     {
