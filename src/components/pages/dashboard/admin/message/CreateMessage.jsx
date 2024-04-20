@@ -1,61 +1,87 @@
+import { useAuth } from "@/components/context/AuthContext";
 import TextInput from "@/components/core/inputs/TextInput";
 import SelectInput from "@/components/core/inputs/TextSelect";
-import TextareaInput from "@/components/core/inputs/TextareaInput";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 import { useState } from "react";
+import { useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 const CreateMessage = () => {
+  const { adminData } = useAuth();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [showMessage, setShowMessage] = useState("");
   const [showMessageId, setShowMessageId] = useState("");
+  const [error, setError] = useState("");
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case "subject":
+        setSubject(value);
+        break;
+      case "message":
+        setMessage(value);
+        break;
+      case "showMessage":
+        setShowMessage(value);
+        break;
+      case "showMessageId":
+        setShowMessageId(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  // console.log('hi', subject,showMessageId)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setError("Please enter both email and password.");
-      return;
-    }
+  console.log('hi', subject,showMessage, message,showMessageId)
 
-    const formData = {
-      name,
-      role,
-      number,
-      admin_email : email,
-      password,
-    };
+    const formData = new FormData();
+    formData.append("subject", subject);
+    formData.append("message", message);
+    formData.append("showMessage", showMessage);
+    formData.append("showMessageId", showMessageId);
+    formData.append("admin_name", adminData?.name);
+    formData.append("admin_email", adminData?.admin_email);
+    formData.append("image", e.target.image?.files[0]);
+
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/admin`,
+        `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/message`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
+          // body: formData,
         }
       );
 
       if (response.ok) {
-        // Request successful
-        // eslint-disable-next-line no-unused-vars
         const responseData = await response.json();
-        // console.log("Registration successful:", responseData);
-        navigate("/dashboard/admin-info");
-        // Handle success scenario here (e.g., redirect user, show success message)
+        queryClient.invalidateQueries("admins");
+        toast({
+          description: "Message sent successfully!",
+        });
+        navigate("/dashboard/all-message");
       } else {
-        // Request failed
         const errorData = await response.json();
-        setError(errorData.message || "Registration failed.");
-        // Handle error scenario here (e.g., display error message to the user)
+        setError(errorData.message || "Message sending failed.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       setError("An unexpected error occurred.");
-      // Handle unexpected errors here
     }
   };
 
@@ -69,7 +95,7 @@ const CreateMessage = () => {
               id={"subject"}
               label="Subject"
               type="text"
-              onChange={(e) => setSubject(e.target.value)}
+              onChange={handleInputChange}
             />
           </div>
           <div>
@@ -77,17 +103,11 @@ const CreateMessage = () => {
               id={"message"}
               label="Message"
               type="text"
-              onChange={(e) => setMessage(e.target.value)}
+              // onChange={(e) => setMessage(e.target.value)}
+              onChange={handleInputChange}
             />
           </div>
-          {/* <div>
-            <TextInput
-              id={"showMessage"}
-              label="Message"
-              type="text"
-              onChange={(e) => setShowMessage(e.target.value)}
-            />
-          </div> */}
+
           <SelectInput
             id="showMessage"
             options={[
@@ -100,16 +120,33 @@ const CreateMessage = () => {
             ]}
             label="Received"
             // placeholder="Received"
-            onChange={(e) => setShowMessage(e.target.value)}
+            onChange={handleInputChange}
           />
-          <div>
-            <TextInput
-              id={"showMessage_id"}
-              label="Provide Id"
-              type="text"
-              onChange={(e) => setShowMessageId(e.target.value)}
-            />
-          </div>
+          {showMessage === "admin_id" ||
+          showMessage === "employee_id" ||
+          showMessage === "client_id" ? (
+            <div>
+              <TextInput
+                id="showMessage_id"
+                label="Provide Id"
+                type="text"
+                // onChange={(e) => {
+                //   setShowMessageId(e.target.value); // Update showMessageId state
+                //   handleInputChange(e); // Call handleInputChange function with the event
+                // }}
+                onChange={handleInputChange}
+              />
+            </div>
+          ) : null}
+          <input
+            type="file"
+            id={"image"}
+            name="image"
+            // value={formData.image}
+            onChange={handleInputChange}
+            className="mb-3 border-b-2 border-gray-300 focus:border-blue-500 outline-none"
+            placeholder="image"
+          />
 
           <div>
             <Button className="w-full" type="submit">
