@@ -1,24 +1,14 @@
 import { useState } from "react";
-import { Button } from "../ui/button";
-import { AlertDialog, AlertDialogContent } from "../ui/alert-dialog";
+import { Button } from "../../../../../ui/button";
+import { AlertDialog, AlertDialogContent } from "../../../../../ui/alert-dialog";
 import { RiEditCircleFill } from "react-icons/ri";
-import SelectInput from "./inputs/TextSelect";
-import { toast } from "../ui/use-toast";
+import { toast } from "../../../../../ui/use-toast";
 import { useQueryClient } from "react-query";
-import TextInput from "./inputs/TextInput";
-import { useAuth } from "../context/AuthContext";
 
-const EditAction = ({ admins }) => {
+const EmpClientEditAction = ({ admins }) => {
   const [open, setOpen] = useState(false);
-  const { adminData, employeeData } = useAuth();
-
-  // console.log("adminData", admins);
 
   const [formData, setFormData] = useState({
-    name: admins?.name || "",
-    number: admins?.number || "",
-    admin_email: admins?.admin_email || "",
-    role: admins?.role || "",
     image: admins?.image || "",
   });
 
@@ -35,17 +25,11 @@ const EditAction = ({ admins }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataWithFile = new FormData();
-    formDataWithFile.append("name", formData.name);
-    formDataWithFile.append("number", formData.number);
-    formDataWithFile.append("admin_email", formData?.admin_email);
-    formDataWithFile.append("role", formData.role);
     formDataWithFile.append("image", e.target.image.files[0]);
-
-    console.log("client", formDataWithFile);
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/admin/${
+        `${import.meta.env.VITE_LOCAL_API_URL}/api/v1/client/${
           admins?.profile_id
         }`,
         {
@@ -100,56 +84,6 @@ const EditAction = ({ admins }) => {
               </div>
 
               <div className="col-span-3">
-                {adminData?.role === "superAdmin" ||
-                adminData?.role === "superAdmin" ? (
-                  <>
-                    <div className="mb-3">
-                      <TextInput
-                        label="Name"
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <TextInput
-                        id="number"
-                        label="Number"
-                        type="text"
-                        name="number"
-                        value={formData.number}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <TextInput
-                        id="admin_email"
-                        label="Email"
-                        type="text"
-                        name="admin_email"
-                        value={formData.admin_email}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <SelectInput
-                      id="role"
-                      name="role"
-                      options={[
-                        { value: "SUPER_ADMIN", label: "Super Admin" },
-                        { value: "SUB_ADMIN", label: "Sub Admin" },
-                        { value: "ADMIN", label: "Admin" },
-                        { value: "EDITOR", label: "Editor" },
-                        { value: "ACCOUNT", label: "Account" },
-                      ]}
-                      label="Select Role"
-                      placeholder={formData.role}
-                      value={formData.role}
-                      onChange={handleInputChange}
-                    />
-                  </>
-                ) : null}
-
                 <input
                   type="file"
                   id={"image"}
@@ -178,4 +112,4 @@ const EditAction = ({ admins }) => {
   );
 };
 
-export default EditAction;
+export default EmpClientEditAction;

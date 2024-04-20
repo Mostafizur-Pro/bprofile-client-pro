@@ -118,10 +118,9 @@ const AdminLeftAside = () => {
               )}
               {adminData && (
                 <>
-                {/* Admin */}
+                  {/* Admin */}
                   {adminData?.role === "SUPPER_ADMIN" ||
                     (adminData?.role === "superAdmin" && (
-                      
                       <AccordionContent
                         className={` mt-2 px-3.5 py-2.5 ${
                           location.pathname === "/dashboard/admin-info" &&
@@ -131,7 +130,6 @@ const AdminLeftAside = () => {
                         <Link to={"/dashboard/admin-info"}>Admins Info</Link>
                       </AccordionContent>
                     ))}
-                  
 
                   {/* Client */}
                   <AccordionContent
@@ -289,16 +287,21 @@ const AdminLeftAside = () => {
                   "font-semibold bg-secondary_main rounded-[6px] text-white"
                 }`}
               >
-                <Link to={"/dashboard/all-message"}>All Message</Link>
+                <Link to={"/dashboard/all-message"}>Message</Link>
               </AccordionContent>
-              <AccordionContent
-                className={`px-3.5 py-2.5 ${
-                  location.pathname === "/dashboard/create-message" &&
-                  "font-semibold bg-secondary_main rounded-[6px] text-white"
-                }`}
-              >
-                <Link to={"/dashboard/create-message"}>Create Message</Link>
-              </AccordionContent>
+
+              {adminData && (
+                <>
+                  <AccordionContent
+                    className={`px-3.5 py-2.5 ${
+                      location.pathname === "/dashboard/create-message" &&
+                      "font-semibold bg-secondary_main rounded-[6px] text-white"
+                    }`}
+                  >
+                    <Link to={"/dashboard/create-message"}>Create Message</Link>
+                  </AccordionContent>
+                </>
+              )}
             </div>
           </AccordionItem>
         </Accordion>
@@ -358,54 +361,61 @@ const AdminLeftAside = () => {
         </Accordion>
       </div>
       {/* posts */}
-      <div>
-        <Accordion type="single" collapsible>
-          <AccordionItem value="authentication">
-            <AccordionTrigger
-              className={`font-normal ${
-                [
-                  "/dashboard/hallroom-posts",
-                  "/dashboard/paid-post",
-                  "/dashboard/create-post",
-                ].includes(location.pathname)
-                  ? "font-semibold bg-secondary_main rounded-[6px] text-white"
-                  : ""
-              }`}
-            >
-              <div className="flex items-center gap-2  px-3">
-                <BsFillFileEarmarkPostFill className="text-3xl" />
-                <p className="">Posts</p>
-              </div>
-            </AccordionTrigger>
-            <div className="ps-2 ms-6 border-s border-dashed">
-              <AccordionContent
-                className={`px-3.5 py-2.5 mt-2 ${
-                  location.pathname === "/dashboard/hallroom-posts" &&
-                  "font-semibold bg-secondary_main rounded-[6px] text-white"
-                }`}
-              >
-                <Link to={"/dashboard/hallroom-posts"}>All Hallroom Posts</Link>
-              </AccordionContent>
-              <AccordionContent
-                className={`px-3.5 py-2.5 ${
-                  location.pathname === "/dashboard/paid-post" &&
-                  "font-semibold bg-secondary_main rounded-[6px] text-white"
-                }`}
-              >
-                <Link to={"/dashboard/paid-post"}>All Paid Posts</Link>
-              </AccordionContent>
-              <AccordionContent
-                className={`px-3.5 py-2.5 ${
-                  location.pathname === "/dashboard/create-post" &&
-                  "font-semibold bg-secondary_main rounded-[6px] text-white"
-                }`}
-              >
-                <Link to={"/dashboard/create-post"}>Create Post</Link>
-              </AccordionContent>
-            </div>
-          </AccordionItem>
-        </Accordion>
-      </div>
+      {adminData && (
+        <>
+          <div>
+            <Accordion type="single" collapsible>
+              <AccordionItem value="authentication">
+                <AccordionTrigger
+                  className={`font-normal ${
+                    [
+                      "/dashboard/hallroom-posts",
+                      "/dashboard/paid-post",
+                      "/dashboard/create-post",
+                    ].includes(location.pathname)
+                      ? "font-semibold bg-secondary_main rounded-[6px] text-white"
+                      : ""
+                  }`}
+                >
+                  <div className="flex items-center gap-2  px-3">
+                    <BsFillFileEarmarkPostFill className="text-3xl" />
+                    <p className="">Posts</p>
+                  </div>
+                </AccordionTrigger>
+                <div className="ps-2 ms-6 border-s border-dashed">
+                  <AccordionContent
+                    className={`px-3.5 py-2.5 mt-2 ${
+                      location.pathname === "/dashboard/hallroom-posts" &&
+                      "font-semibold bg-secondary_main rounded-[6px] text-white"
+                    }`}
+                  >
+                    <Link to={"/dashboard/hallroom-posts"}>
+                      All Hallroom Posts
+                    </Link>
+                  </AccordionContent>
+                  <AccordionContent
+                    className={`px-3.5 py-2.5 ${
+                      location.pathname === "/dashboard/paid-post" &&
+                      "font-semibold bg-secondary_main rounded-[6px] text-white"
+                    }`}
+                  >
+                    <Link to={"/dashboard/paid-post"}>All Paid Posts</Link>
+                  </AccordionContent>
+                  <AccordionContent
+                    className={`px-3.5 py-2.5 ${
+                      location.pathname === "/dashboard/create-post" &&
+                      "font-semibold bg-secondary_main rounded-[6px] text-white"
+                    }`}
+                  >
+                    <Link to={"/dashboard/create-post"}>Create Post</Link>
+                  </AccordionContent>
+                </div>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        </>
+      )}
+
       {/* Pages */}
       <div className="mt-1.5">
         <Accordion type="single" collapsible>

@@ -1,5 +1,6 @@
 import { useAuth } from "@/components/context/AuthContext";
 import EditAction from "@/components/core/EditAction";
+import EmpClientEditAction from "@/components/pages/dashboard/employee/profileLists/editModel/EmpClientEditAction";
 import ViewAction from "@/components/core/ViewAction";
 import CustomSpinner from "@/components/core/spinner/Spinner";
 import DashboardTable from "@/components/core/table/DashboardTable";
@@ -42,6 +43,26 @@ const ClientList = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  
+  const totalPages = Math.ceil(grandTotal / itemsPerPage);
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  const handlePerviousData = () => {
+    if (currentPage <= 1) {
+      setCurrentPage(1);
+    } else if (currentPage >= 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const handleNextData = () => {
+    if (currentPage >= totalPages) {
+      setCurrentPage(1);
+    } else if (currentPage <= totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   // console.log("admin", grandTotal);
 
@@ -119,7 +140,7 @@ const ClientList = () => {
           {clients?.image ===
             "https://static.vecteezy.com/system/resources/previews/011/675/374/original/man-avatar-image-for-profile-png.png" && (
             <>
-              <EditAction admins={clients} />
+              <EmpClientEditAction admins={clients} />
             </>
           )}
         </div>
@@ -127,24 +148,6 @@ const ClientList = () => {
     },
   ];
 
-  const totalPages = Math.ceil(grandTotal / itemsPerPage);
-  const handlePageClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-  const handlePerviousData = () => {
-    if (currentPage <= 1) {
-      setCurrentPage(1);
-    } else if (currentPage >= 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-  const handleNextData = () => {
-    if (currentPage >= totalPages) {
-      setCurrentPage(1);
-    } else if (currentPage <= totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
 
   // fetch data and pass from here while replacing the [...new array(5)]
 
