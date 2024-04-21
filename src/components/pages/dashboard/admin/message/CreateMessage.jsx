@@ -15,45 +15,22 @@ const CreateMessage = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [showMessage, setShowMessage] = useState("");
-  const [showMessageId, setShowMessageId] = useState("");
+  const [showMessageId, setShowMessageId] = useState(null);
   const [error, setError] = useState("");
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    switch (name) {
-      case "subject":
-        setSubject(value);
-        break;
-      case "message":
-        setMessage(value);
-        break;
-      case "showMessage":
-        setShowMessage(value);
-        break;
-      case "showMessageId":
-        setShowMessageId(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  // console.log('hi', subject,showMessageId)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  console.log('hi', subject,showMessage, message,showMessageId)
+    const formData = {
+      subject,
+      message,
+      showMessage,
+      showMessageId: showMessageId || null,
+      admin_name: adminData.name || null,
+      admin_email: adminData.admin_email || null,
+    };
 
-    const formData = new FormData();
-    formData.append("subject", subject);
-    formData.append("message", message);
-    formData.append("showMessage", showMessage);
-    formData.append("showMessageId", showMessageId);
-    formData.append("admin_name", adminData?.name);
-    formData.append("admin_email", adminData?.admin_email);
-    formData.append("image", e.target.image?.files[0]);
-
+    console.log("form", formData);
 
     try {
       const response = await fetch(
@@ -67,6 +44,8 @@ const CreateMessage = () => {
           // body: formData,
         }
       );
+
+      console.log("response", response);
 
       if (response.ok) {
         const responseData = await response.json();
@@ -95,7 +74,7 @@ const CreateMessage = () => {
               id={"subject"}
               label="Subject"
               type="text"
-              onChange={handleInputChange}
+              onChange={(e) => setSubject(e.target.value)}
             />
           </div>
           <div>
@@ -103,8 +82,7 @@ const CreateMessage = () => {
               id={"message"}
               label="Message"
               type="text"
-              // onChange={(e) => setMessage(e.target.value)}
-              onChange={handleInputChange}
+              onChange={(e) => setMessage(e.target.value)}
             />
           </div>
 
@@ -119,8 +97,7 @@ const CreateMessage = () => {
               { value: "admin_id", label: "Admin Id" },
             ]}
             label="Received"
-            // placeholder="Received"
-            onChange={handleInputChange}
+            onChange={(e) => setShowMessage(e.target.value)}
           />
           {showMessage === "admin_id" ||
           showMessage === "employee_id" ||
@@ -130,23 +107,10 @@ const CreateMessage = () => {
                 id="showMessage_id"
                 label="Provide Id"
                 type="text"
-                // onChange={(e) => {
-                //   setShowMessageId(e.target.value); // Update showMessageId state
-                //   handleInputChange(e); // Call handleInputChange function with the event
-                // }}
-                onChange={handleInputChange}
+                onChange={(e) => setShowMessageId(e.target.value)}
               />
             </div>
           ) : null}
-          <input
-            type="file"
-            id={"image"}
-            name="image"
-            // value={formData.image}
-            onChange={handleInputChange}
-            className="mb-3 border-b-2 border-gray-300 focus:border-blue-500 outline-none"
-            placeholder="image"
-          />
 
           <div>
             <Button className="w-full" type="submit">
