@@ -6,14 +6,15 @@ import { Button } from "../ui/button";
 import { AlertDialog, AlertDialogContent } from "../ui/alert-dialog";
 import { useMutation, useQueryClient } from "react-query";
 
-const DeleteAction = ({ handleDeleteSubmit, isLoading }) => {
+const DeleteAction = ({ handleDeleteSubmit, isLoading, link }) => {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
+  
   const deleteAdminMutation = useMutation(
     async () => {
       const url = `${
         import.meta.env.VITE_LOCAL_API_URL
-      }/api/v1/admin/${handleDeleteSubmit}`;
+      }/${link}/${handleDeleteSubmit}`;
       const response = await fetch(url, {
         method: "DELETE",
       });
@@ -96,7 +97,7 @@ const DeleteAction = ({ handleDeleteSubmit, isLoading }) => {
               </p>
             </div>
             <h3 className="text-2xl font-semibold  text-center">
-              Confirm Delete
+              Confirm Delete 
             </h3>
             <p className=" text-center py-2">
               Are you sure you want to <br /> delete this file?

@@ -30,7 +30,7 @@ const CreateMessage = () => {
       admin_email: adminData.admin_email || null,
     };
 
-    console.log("form", formData);
+    // console.log("form", formData);
 
     try {
       const response = await fetch(
@@ -45,7 +45,7 @@ const CreateMessage = () => {
         }
       );
 
-      console.log("response", response);
+      // console.log("response", response);
 
       if (response.ok) {
         const responseData = await response.json();

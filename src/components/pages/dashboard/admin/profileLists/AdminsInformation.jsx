@@ -83,6 +83,7 @@ const AdminsInformation = () => {
           <DeleteAction
             handleDeleteSubmit={admins?.profile_id}
             isLoading={false}
+            link={"api/v1/admin"}
           />
           <EditAction admins={admins} />
           {/* <ViewAction admins={admins} /> */}

@@ -20,7 +20,7 @@ const AllMessage = () => {
     return <div>Error: {error}</div>;
   }
 
-  // console.log("message", messages);
+  // console.log("message", messages.id);
 
   const AllMessageColumn = [
     {
@@ -78,12 +78,13 @@ const AllMessage = () => {
     {
       title: "Action",
       dataKey: "action",
-      row: () => (
+      row: (messages) => (
         <div>
           <p>
             <DeleteAction
-              handleDeleteSubmit={() => undefined}
+              handleDeleteSubmit={messages?.id}
               isLoading={false}
+              link={"api/v1/message"}
             />
           </p>
         </div>
